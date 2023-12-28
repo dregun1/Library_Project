@@ -1,0 +1,156 @@
+use db_scott;
+CREATE TABLE member (
+  memberid          varchar(50),
+  membername        varchar(50),
+  postalcode        varchar(6),   
+  postaladdress     varchar(200), 
+  detailaddress     varchar(300), 
+  mphone            varchar(15), 
+  birthdate         date, 		  
+  passcode          varchar(100),
+  joindate          date,
+  memberflag        varchar(2),   /* 00: 사용자, 01: 고객 */
+  email             varchar(50),
+  lastlogindate     date,         /* 매 로그인 성공 시, sysdate로 update */
+   enabled char(10) DEFAULT '1' CHECK (enabled IN ('1', '0')),
+  constraint memberid_pk primary key(memberid)
+);
+------------------------------------------------------------------------------
+
+create table persistent_logins(
+	username varchar(64),
+    series varchar(64) primary key,
+    token varchar(64) not null,
+    last_used timestamp not null
+);
+------------------------------------------------------------------------------
+
+CREATE TABLE book (
+isbn              varchar(13),
+title             varchar(200),
+genrecode         varchar(3),
+genrecrawled		varchar(200),
+author            varchar(100),
+publisher         varchar(100),
+publisheddate     date,
+totbookcnt        int,
+rentedbookcnt     int,
+curbookcnt        int,   
+price             int,   
+cumrentalcnt      int,   
+registereddate    date,        
+memberid          varchar(50),   
+bookimgurl        varchar(500),
+bookcontent       varchar(4000),
+reservation_quantity int,
+constraint isbn_pk primary key(isbn)
+);
+
+ALTER TABLE book
+ADD COLUMN modifier varchar(50),
+ADD CONSTRAINT fk_modifier
+FOREIGN KEY (modifier)
+REFERENCES member(memberid);
+
+
+insert into member(memberid, membername, postalcode, postaladdress, detailaddress, mphone, birthdate, passcode, joindate, memberflag, email)
+ values('admin1','홍길동','16455','경기 수원시 팔달구 덕영대로 899','3F','010-1111-2222','2000-01-01','1234','2023-07-10','01','aaa@naver.com');
+
+
+
+ADD CONSTRAINT fk_memberid
+FOREIGN KEY (memberid)
+REFERENCES member(memberid);
+------------------------------------------------------------------------------
+
+CREATE TABLE reservation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    memberid varchar(50),
+    isbn VARCHAR(13),
+    rental_status INT DEFAULT 0 NOT NULL,
+    FOREIGN KEY (memberid) REFERENCES member(memberid),
+    FOREIGN KEY (isbn) REFERENCES book(isbn)
+);
+ALTER TABLE reservation
+ADD COLUMN expiration_date TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL 14 DAY);
+------------------------------------------------------------------------------
+
+CREATE TABLE ratings (
+		  ratingsid         varchar(36) DEFAULT (UUID()),
+		  isbn              varchar(13),
+		  memberid          varchar(50), 
+		  writedate         date,
+		  content           varchar(1000),
+		  score             int,            
+		  
+		  constraint ratings_pk primary key(ratingsid),
+		  constraint ratings_isbn_fk FOREIGN KEY(isbn)REFERENCES book(isbn)ON DELETE cascade,
+		  constraint ratings_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE cascade
+		);
+
+------------------------------------------------------------------------------
+CREATE TABLE rentallist (
+		  rentallistid      VARCHAR(36) DEFAULT (UUID()),
+		  rentdate          date,
+		  plannedreturndate date,
+		  isbn              varchar(13),
+		  memberid          varchar(50),
+		  actualreturndate  date,
+		extensioncount int default 0,
+  
+		  constraint rentallist_pk primary key(rentallistid),
+		  constraint rentallist_isbn_fk FOREIGN KEY(isbn)REFERENCES book(isbn) ON DELETE set null,
+		  constraint rentallist_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE set null
+		);
+------------------------------------------------------------------------------
+CREATE TABLE board (
+		  boardid           int not null auto_increment,
+		  btitle            varchar(500),
+		  bcontent        longtext,
+		  createdate        date,
+		  readcnt           int default 0,
+		  memberid          varchar(50),
+		  
+		  constraint board_pk primary key(boardid),
+		  constraint board_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE set null
+		  
+		);
+------------------------------------------------------------------------------
+CREATE TABLE wishlist (
+		  wishlistid        VARCHAR(36) DEFAULT (UUID()),
+		  isbn              varchar(13),
+		  memberid          varchar(50),
+		  createdate        date,
+		    
+		  constraint wishlist_pk primary key(wishlistid),
+		  constraint wishlist_isbn_fk FOREIGN KEY(isbn)REFERENCES book(isbn)ON DELETE cascade,
+		  constraint wishlist_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE cascade
+		);
+------------------------------------------------------------------------------
+CREATE TABLE bookreport (
+		  reportid          VARCHAR(36) DEFAULT (UUID()),
+		  memberid          varchar(50),
+		  title             varchar(500),
+		author           varchar(255),
+		  content           varchar(4000),
+		  score             int,
+		  createdate        date,
+		  readcnt           int default 0,
+		  
+		  
+		  constraint bookreport_pk primary key(reportid),
+		  constraint bookreport_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE set null 
+		);*
+-------------------------------------------------------------------------------------------------
+CREATE TABLE reportRatings (
+		  ratingsid         varchar(36) DEFAULT (UUID()),
+		  reportid              varchar(36),
+		  memberid          varchar(50), 
+		  writedate         date,
+		  content           varchar(1000),           
+		  
+		  constraint ratings_pk primary key(ratingsid),
+		  constraint reportRatings_bookreport_fk FOREIGN KEY(reportid)REFERENCES bookreport(reportid)ON DELETE cascade,
+		  constraint reportRatings_memberid_fk FOREIGN KEY(memberid)REFERENCES member(memberid)ON DELETE cascade
+		);

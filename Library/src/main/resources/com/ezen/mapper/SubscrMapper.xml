@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.SubscrMapper">
+
+	<select id="getListWithPaging" resultType="com.ezen.domain.SubscrVO">
+			select *
+			from subscr
+			limit #{cri.skip}, #{cri.amount} 	
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from subscr 
+	</select>
+	
+	<insert id="insertSubscr">
+		insert into subscr(subscrname, price, salefromdate, saletodate, subscrperiod,
+							memberid, registereddate, allowedbookcnt, purpose)
+		values(#{subscrname}, #{price}, #{salefromdate}, #{saletodate}, #{subscrperiod},
+				#{memberid}, #{registereddate}, #{allowedbookcnt}, #{purpose} )
+			
+	</insert>
+	
+	<select id="read" resultType="com.ezen.domain.SubscrVO">
+		select * from subscr where subscrid = #{subscrid}
+	</select>
+	
+	<delete id="deleteSubscr">
+		delete from subscr where subscrid = #{subscrid}
+	</delete>
+	
+	<update id="updateSubscr">
+		update subscr set
+		subscrname = #{subscrname}, price = #{price},
+		salefromdate = #{salefromdate}, saletodate = #{saletodate},
+		subscrperiod = #{subscrperiod}, memberid = #{memberid},
+		registereddate = #{registereddate}, allowedbookcnt = #{allowedbookcnt},
+		purpose = #{purpose}
+		where subscrid = #{subscrid}
+	</update>
+	
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.ReturnRequestMapper">
+
+
+
+	<!-- 전체 데이터 조회 (조인 사용) -->
+	<select id="getList"
+	    resultType="com.ezen.domain.ReturnRequestVO">
+	    <![CDATA[
+	        SELECT
+	            r.returnrequestid,
+	            r.rentallistid,
+	            r.memberid,
+	            r.isbn,
+	            r.requestdate,
+	            r.actualreturndate,
+	            b.title,
+	            b.bookimgurl,
+	            rl.rentdate,
+	            rl.plannedreturndate
+	        FROM returnrequest r
+	        LEFT JOIN book b ON r.isbn = b.isbn
+	        LEFT JOIN rentallist rl ON r.rentallistid = rl.rentallistid
+	    ]]>
+	</select>
+	
+	<!-- 페이징 처리 (조인 사용) -->
+	<select id="getListWithPaging"
+	    resultType="com.ezen.domain.ReturnRequestVO"
+	    parameterType="com.ezen.domain.Criterial">
+	    <![CDATA[
+	        SELECT
+	            r.returnrequestid,
+	            r.rentallistid,
+	            r.memberid,
+	            r.isbn,
+	            r.requestdate,
+	            r.actualreturndate,
+	            b.title,
+	            b.bookimgurl,
+	            rl.rentdate,
+	            rl.plannedreturndate
+	        FROM returnrequest r
+	        LEFT JOIN book b ON r.isbn = b.isbn
+	        LEFT JOIN rentallist rl ON r.rentallistid = rl.rentallistid
+	        ORDER BY r.returnrequestid DESC
+	        LIMIT #{skip}, #{amount}
+	    ]]>
+	</select>
+	
+	<!-- rentallistid로 데이터 조회 (조인 사용) -->
+	<select id="read" resultType="com.ezen.domain.ReturnRequestVO"
+	    parameterType="String">
+	    <![CDATA[
+	        SELECT
+	            r.returnrequestid,
+	            r.rentallistid,
+	            r.memberid,
+	            r.isbn,
+	            r.requestdate,
+	            r.actualreturndate,
+	            b.title,
+	            b.bookimgurl,
+	            rl.rentdate,
+	            rl.plannedreturndate
+	        FROM returnrequest r
+	        LEFT JOIN book b ON r.isbn = b.isbn
+	        LEFT JOIN rentallist rl ON r.rentallistid = rl.rentallistid
+	        WHERE r.returnrequestid = #{returnrequestid}
+	    ]]>
+	</select>
+
+	<!-- rentallistid로 데이터 삭제 -->
+	<delete id="delete">
+		DELETE
+		FROM returnrequest
+		WHERE returnrequestid =
+		#{returnrequestid}
+	</delete>
+
+	<!-- 데이터 등록 -->
+	<insert id="insert">
+		INSERT
+		INTO returnrequest
+		(returnrequestid,
+		rentallistid,
+		memberid,
+		isbn,
+		requestdate,
+		actualreturndate)
+		VALUES
+		(UUID(),
+		#{rentallistid},
+		#{memberid},
+		#{isbn},
+		NOW(),
+		#{actualreturndate})
+	</insert>
+	
+	
+	<!-- 전체 데이터 수 조회 -->
+	<select id="getTotal" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM returnrequest
+	</select>
+
+</mapper>

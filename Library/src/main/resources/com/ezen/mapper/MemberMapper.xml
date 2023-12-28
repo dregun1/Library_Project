@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.MemberMapper">
+
+
+	<select id="readInfo" resultType="com.ezen.domain.MemberVO">
+		select memberid, membername, postalcode, postaladdress, detailaddress, mphone, birthdate, passcode, joindate, memberflag, email, enabled from member where memberid = #{memberid}
+	</select>
+	
+	<insert id="memberJoin">
+		insert into member(memberid, membername, postalcode, postaladdress, detailaddress, mphone, birthdate, passcode, joindate, memberflag, email, enabled)
+ 		values(#{memberid},#{membername},#{postalcode},#{postaladdress},#{detailaddress},#{mphone},#{birthdate},#{passcode},#{joindate},00,#{email},1);
+	</insert>
+	
+	<select id="SelectID" resultType="String">
+		select memberid from member where memberid = #{id}
+	</select>
+	
+	<select id="SelectPW" resultType="String">
+		select passcode from member where memberid = #{memberid}
+	</select>
+	
+	<update id="memberupdate">
+		update member set membername=#{membername}, postalcode=#{postalcode}, 
+		postaladdress=#{postaladdress}, detailaddress=#{detailaddress}, mphone=#{mphone}, birthdate=#{birthdate}, email=#{email}
+		where memberid=#{memberid}
+	</update>
+	
+	<update id="pwUpdate">
+		update member set passcode=#{param1} where memberid=#{param2}
+	</update>
+
+</mapper>

@@ -1,0 +1,229 @@
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 600px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+    background: url(img/svisual_img.png);
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    padding-top: 11px;
+    border-left: none;
+    border-right: none;
+}
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+}
+
+.loginWrap {
+    width: 950px;
+    height: auto;
+    padding-top: 80px;
+}
+
+.loginWrap>.loginForm {
+    padding-top: 50px;
+    background-color: #eee;
+    height: 150px;
+}
+
+.loginForm>.loginBox {
+    display: flex;
+    justify-content: space-evenly;
+    height: 250px;
+    width: 750px;
+}
+
+.loginInputBox>.loginId {
+    width: 350px;
+    height: 50px;
+}
+
+
+.loginInputBox>.loginId>input {
+    padding: 10px 130px 10px 0px;
+}
+
+.loginInputBox>.loginPw {
+    width: 350px;
+    height: 50px;
+}
+
+.loginInputBox>.loginPw>input {
+    padding: 10px 130px 10px 0px;
+}
+
+.loginInputBox>.loginSub>ul {
+    display: flex;
+}
+
+.loginInputBox>.loginSub>ul>li {
+    padding: 0 5px;
+}
+
+.loginInputBox>.loginSub>ul>li > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.loginBtnBox {
+    width: 120px;
+    height: 100px;
+}
+
+.loginBtnBox>.loginBtn {
+    width: 120px;
+    height: 100px;
+    background-color: #f36207;
+    border: 1px solid #f36207;
+    color: #fff;
+    font-size: 23px;
+}
+
+.loginWrap>.loginDesc {
+    background-color: #fff;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 30px;
+}
+
+.kakaologin{
+	position:absolute;
+	left: 900px;
+	top:350px;
+}
+
+
+
+  .myModal {
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 10px; /* 둥근 테두리 추가 */
+        text-align: center; /* 텍스트 가운데 정렬 */
+        font-size: 24px; /* 글자 크기 조절 */
+    }
+
+    .modal-body {
+        position: relative;
+        width: 400px;
+        height: 200px;
+        padding: 20px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+        border: 2px solid #f36207; /* 주황색 테두리 추가 */
+        border-radius: 8px; /* 둥근 테두리 추가 */
+    }
+	
+	.modal-body p {
+        font-size: 25px; /* 내용의 글자 크기 조절 */
+    }
+	.close_button {
+         position: absolute;
+        top: 10px; /* 오른쪽 상단으로 이동 */
+        right: 10px; /* 오른쪽 상단으로 이동 */
+        font-size: 20px;
+        color: #f36207; /* 주황색으로 설정 */
+        cursor: pointer;
+        border: 2px solid #f36207; /* 주황색 테두리 추가 */
+        border-radius: 50%; /* 원 모양으로 둥근 테두리 추가 */
+        padding: 5px; /* 내부 여백 추가 */
+    }

@@ -1,0 +1,240 @@
+ /* headerTop */
+ header {
+	margin : 0 auto;
+	width : 100%;
+	height : 200px;
+	margin-top: 20px;
+}
+
+.headerTopWrap {
+	width : 1200px;
+	display : flex;
+	margin : 0 auto;
+	height : 120px;
+	justify-content: space-between;
+}
+
+.logo {
+	width : 200px;
+	height : 120px;
+}
+
+.logo > a > img {
+	width : 100%;
+	height : 100%;
+	cursor: pointer;
+}
+
+.headerSerchWrap {
+	width : 550px;
+	height : 120px;
+}
+
+.headerSerchBox {
+	width : 550px;
+	height : 50px;
+	margin-top: 30px;
+	display: flex;
+	position : relative;
+}
+
+.headerSerchBox form {
+    display: flex;
+    width: 100%;
+}
+
+.headerSerch {
+    flex: 1;
+    display: flex;
+    margin-right: 5px;
+}
+
+.headerSerch select,
+.headerSerch input {
+    height: 100%;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.headerSerch select {
+    width: 20%; /* 조절 필요 */
+}
+
+.headerSerchBox > form > .headerSerch {
+	width : 500px;
+	height : 50px;
+	border: 3px solid #f84600;
+}
+
+.headerSerchBox > form > .headerSerch > input {
+	width : 70%;
+	height : 90%;
+	border: none;
+}
+
+.headerSerchBox > form > .headerSerchBtn {
+	width : 50px;
+	height : 50px;
+	position : absolute;
+	top:0;
+	left :450px;
+}
+
+.headerSerchBox > form > .headerSerchBtn > button {
+	width : 50px;
+	height :50px;
+	margin : 3px 0 0 3px;
+	border: none;
+	background-color:#fff;
+}
+
+.headerSerchBox > form > .headerSerchBtn > button > img {
+	width : 50px;
+	height : 48px;
+	cursor: pointer;
+	margin : 0px 0px 0px -9px;
+}
+
+
+.headerSerchBtn {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.headerSerchBtn button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+    
+}
+
+.headerSerchBtn button img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+/* 추가적인 스타일링 */
+.headerSerch select,
+.headerSerch input,
+.headerSerchBtn button {
+    border-radius: 5px; /* 선택적으로 조절 가능 */
+    margin-right: 5px; /* 간격 조절 가능 */
+}
+
+/* placeholder 스타일링 */
+.headerSerch input::placeholder {
+    color: #888;
+}
+
+
+.headerNav1 {
+	width : 300px;
+	height : 120px;
+}
+
+.headerNav1 > a {
+	margin-left: 50px;
+	line-height: 30px;
+}
+
+.headerNav1 > ul {
+	display :flex;
+	padding-top: 50px;
+	letter-spacing: 2px;
+}
+
+.headerNav1 > ul > li {
+	padding-left: 5px;
+}
+
+.headerNav1 > ul > li > a {
+	text-decoration: none;
+	color : #000;
+}
+
+/* headerBottom */
+.headerBottomWrap {
+	margin-top: 10px;
+	width : 100%;
+	height : auto;
+	border-top : 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+
+.headerNav2 {
+	width : 1200px;
+	margin : 0 auto;
+	height : auto;
+}
+
+
+.headerNav2 > nav > ul {
+	display:flex;
+	justify-content: space-evenly;
+}
+
+
+.headerNav2 > nav > ul > li {
+	font-size: 20px;
+	padding-top : 30px;
+	height : 50px;
+	width : 300px;
+	text-align: center;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.headerNav2 > nav > ul > li > ul {
+	display:none;
+	height:200px;
+	text-align: left;
+	font-size:16px;
+	margin-top : 30px;
+	line-height: 30px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	border : 1px solid #000;
+	background-color: #fff;
+	position: relative;
+	z-index: 3;
+}
+
+.headerNav2 > nav > ul > li:nth-child(1) > ul {
+	border-right: none;
+}
+
+.headerNav2 > nav > ul > li:nth-child(2) > ul {
+	border-right: none;
+}
+
+.headerNav2 > nav > ul > li:nth-child(3) > ul {
+	border-right: none;
+}
+
+.headerNav2 > nav > ul > li > ul > li {
+	padding-top: 10px;
+}
+
+.headerNav2 > nav > ul > li > ul > li > a {
+	text-decoration: none;
+	color : #000;
+}
+
+.headerNav2 > nav > ul > li > ul > li > a:hover {
+	text-decoration: underline;
+}
+
+.headerNav2 > nav > ul > .hiddenNav > ul {
+	border-left: none;
+}
+
+.hiddenNav > a {
+	text-decoration: none;
+	color: #000;
+}

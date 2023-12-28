@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.BookReportMapper">
+
+
+
+	<insert id="listRegister">
+		insert into bookreport(memberid, title, author, createdate, score, content)
+ 		values(#{memberid},#{title}, #{author},CURDATE(),#{score},#{content});
+	</insert>
+	
+	<update id="listUpdate">
+		UPDATE bookreport
+		SET title = #{title},
+			author = #{author},
+		    content = #{content}
+		WHERE reportid = #{reportid};
+	</update>
+	
+	<update id="readCntUpdate">
+		 UPDATE bookreport 
+		 SET readcnt = readcnt + 1 
+		 WHERE reportid = #{reportid}
+	</update>
+	
+	<delete id="listDelete">
+		DELETE FROM bookreport
+		WHERE reportid = #{reportid}
+	</delete>
+	
+
+  	<select id="getListWithPaging" resultType="com.ezen.domain.BookReportVO">
+        SELECT reportid, title, content, createdate, memberid, readcnt, score, author
+        FROM bookreport
+ 		<trim prefix="where (" suffix=")" prefixOverrides="OR">
+		  		<foreach item='type' collection="typeArr">
+		  			<trim prefix="OR">
+		  				<choose>
+		  					<when test="type == 'T'.toString()">
+		  						title LIKE CONCAT('%', #{keyword}, '%')
+		  					</when>
+		  					<when test="type == 'M'.toString()">
+		  						memberid LIKE CONCAT('%', #{keyword}, '%')
+		  					</when>
+  						</choose>
+  					</trim>
+  				</foreach>
+  			</trim>
+    
+        ORDER BY createdate DESC
+   		LIMIT #{skip}, #{amount}
+	</select>
+
+  
+  <select id="getTotalCount" resultType="int">
+  	select count(*) from bookreport
+  </select>
+  
+  
+   <select id="get" resultType="com.ezen.domain.BookReportVO">
+  		select * from bookreport where reportid = #{reportid}
+  </select>
+  
+  
+</mapper>

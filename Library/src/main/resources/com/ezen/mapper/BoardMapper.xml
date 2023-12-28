@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.BoardMapper">
+
+
+
+	<insert id="listRegister">
+		insert into board(btitle, bcontent, createdate, memberid)
+ 		values(#{btitle},#{bcontent},CURDATE(),#{memberid});
+	</insert>
+	
+	<update id="listUpdate">
+		UPDATE board
+		SET btitle = #{btitle},
+		    bcontent = #{bcontent}
+		WHERE boardid = #{boardid};
+	</update>
+	
+	<update id="readCntUpdate">
+		 UPDATE board 
+		 SET readcnt = readcnt + 1 
+		 WHERE boardid = #{boardid}
+	</update>
+	
+	<delete id="listDelete">
+		DELETE FROM board
+		WHERE boardid = #{boardid}
+	</delete>
+	
+
+  	<select id="getListWithPaging" resultType="com.ezen.domain.BoardVO">
+        SELECT boardid, btitle, bcontent, createdate, memberid, readcnt
+        FROM board
+ 		<trim prefix="where (" suffix=")" prefixOverrides="OR">
+		  		<foreach item='type' collection="typeArr">
+		  			<trim prefix="OR">
+		  				<choose>
+		  					<when test="type == 'N'.toString()">
+		  						btitle LIKE CONCAT('%', #{keyword}, '%')
+		  					</when>
+		  					<when test="type == 'A'.toString()">
+		  						bcontent LIKE CONCAT('%', #{keyword}, '%')
+		  					</when>
+  						</choose>
+  					</trim>
+  				</foreach>
+  			</trim>
+    
+        ORDER BY boardid DESC
+   		LIMIT #{skip}, #{amount}
+	</select>
+
+  
+  <select id="getTotalCount" resultType="int">
+  	select count(*) from board
+  </select>
+  
+  
+   <select id="get" resultType="com.ezen.domain.BoardVO">
+  		select * from board where boardid = #{boardid}
+  </select>
+  
+  
+</mapper>

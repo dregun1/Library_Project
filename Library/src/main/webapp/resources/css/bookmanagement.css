@@ -1,0 +1,210 @@
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 1500px;
+    position: relative;
+    padding-top: 11px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>i {
+    padding-left: 130px;
+}
+.shareContentWrap>.shareNav>ul>.bookNav{
+    display: none;
+    line-height: 60px;
+}
+.shareContentWrap>.shareNav>ul>.subscriptionNav {
+    display: none;
+    line-height: 60px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 11px;
+}
+
+.keyword {
+    color: #f36207;
+}
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+}
+
+.bookInsertWrap {
+    padding-top: 0px;
+}
+
+ .bookInsertWrap table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+
+  /* 테이블 본문 스타일 */
+  .bookInsertWrap table td {
+   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  max-width: 200px; /* 최대 너비 설정 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 생략 부호 (...) 추가 */
+  }
+
+  /* 짝수 행 배경색 지정 */
+  .bookInsertWrap table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+.shareContent .bookInsertWrap table tr:first-child {
+    background-color: #666;
+    color: white; /* 글자색을 흰색으로 변경 */
+    font-weight: bold; /* 글자를 두껍게 표시 (선택 사항) */
+}
+.bookInsertBtnBox {
+    padding: 20px 0px;
+}
+
+
+
+.paging ul li{
+	 list-style: none;
+        padding: 10px;
+        margin: 0;
+        float : left;
+        margin-left : 20px;
+ 
+	
+}
+
+.paging ul li a {
+    color: black;
+    text-decoration: none; 
+}
+	
+.paginate_button.active a {
+	    font-weight: bold;
+	    text-decoration:none;
+}
+
+.searchform{
+	padding: 20px 0px;
+}
+
+.submenu {
+	margin-top : 20px;
+	margin-bottom : 0px;
+	f
+}
+
+.submenu th{	
+	border: 1px solid #e3e3e3;
+    height: 20px;
+	font-size :15px;
+	padding: 5px;	
+}
+
+.submenu a {
+	text-decoration:none;
+	color:black;
+    font-family:   font-family: 'Comic Sans MS', cursive;
+  
+}
+		
+.selectmenu {
+    background-color: #f36207;
+}
+
+.selectmenu a{
+    background-color: #f36207;
+    color:white;
+}

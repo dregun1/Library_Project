@@ -1,0 +1,299 @@
+
+
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 3300px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top:80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+  
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>i {
+    padding-left: 130px;
+}
+.shareContentWrap>.shareNav>ul>.bookNav{
+    display: none;
+    line-height: 60px;
+}
+.shareContentWrap>.shareNav>ul>.subscriptionNav {
+    display: none;
+    line-height: 60px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 11px;
+}
+
+.keyword {
+    color: #f36207;
+}
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+}
+
+.shareContent{
+	margin-top:10px;
+}
+
+
+.boardinput {
+	height: 30px;
+}
+
+.boardclass label{
+	font-size:17px;
+}
+
+.bcontent {
+	margin-top:10px;
+    border: 2px solid #f36207;
+    border-radius: 10px; /* 조절 가능한 값 */
+    padding: 10px;
+    width: 100%;
+    min-height: 800px;
+     box-shadow: 0 0 0 2px #f36207, 0 0 0 4px #e3e3e3;
+}
+
+
+
+.bcontent {
+    margin-top: 10px;
+    border: 2px solid #f36207;
+    border-radius: 10px; /* 조절 가능한 값 */
+    padding: 10px;
+    width: 100%;
+    min-height: 800px;
+    box-shadow: 0 0 0 2px #f36207, 0 0 0 4px #e3e3e3;
+}
+
+.chat li : hover {
+		cursor:pointer;
+	}
+
+
+/* 여기서부터 모달 스타일 */
+.modal {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    overflow: auto;
+}
+
+.modal-body {
+    position: relative;
+    width: 400px;
+    max-width: 80%; /* 최대 너비 80%로 설정 */
+    height: 400px;
+    margin: 15% auto; /* 상단 15%로 조절 */
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    border: 2px solid #f36207;
+}
+
+/* 댓글 입력 부분 */
+.modal-body div {
+    margin-bottom: 15px;
+}
+
+/* 댓글 입력 라벨 */
+.modal-body label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* 댓글 입력 input */
+.modal-body input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    box-sizing: border-box;
+    border: 2px solid #f36207;
+    margin-top: 5px;
+}
+
+
+
+    #addReplyBtn {
+        background-color: #f36207;
+        color: #fff;
+        border: none;
+        padding: 0px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        float: right; 
+    }
+
+   /* 댓글 스타일 */
+.chat {
+    list-style: none;
+    padding: 0;
+}
+
+.chat li {
+    margin-bottom: 15px;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.chat li .header {
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.chat li .memberid {
+    color: #f36207;
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.chat li .reply-date {
+    color: #f36207;
+    font-size: 12px;
+    float: right; /* 오른쪽으로 정렬 */
+    position: absolute; /* 절대 위치 지정 */
+    right: 0; /* 오른쪽 끝으로 이동 */
+}
+
+.chat li p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.chat li .header p {
+    display: inline-block;
+    margin-right: 10px; /* 점수와 유저이름 사이의 간격 조정 */
+}
+    
+    
+    
+    
+    
+    
+  /* 페이징 번호 */
+    ul.replypage {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+   justify-content: center;
+}
+
+ul.replypage li {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+ul.replypage li a{
+  text-decoration : none;
+  color: black;
+}
+
+ul.replypage li.active {
+  background-color: #f36207;
+  color: #fff;
+}
+
+
+

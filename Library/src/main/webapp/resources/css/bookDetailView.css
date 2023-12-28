@@ -1,0 +1,182 @@
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 1800px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+    background: url(img/svisual_img.png);
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 11px;
+}
+
+.keyword {
+    color: #f36207;
+}
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+}
+
+.bookDetailWrap {
+    padding-top: 50px;
+}
+
+.bookDetailWrap > .bookDetailBox{
+    display: flex;
+}
+/* bookDetailImgBox */
+.bookDetailWrap > .bookDetailBox > .bookDetailImgBox {
+    width : 400px;
+    height:450px;
+}
+
+.bookDetailWrap > .bookDetailBox > .bookDetailImgBox > img {
+    width : 280px;
+    height : 400px;
+}
+
+.bookDetailWrap > .bookDetailBox > .bookDetailInfoBox > ul >li {
+    height : 40px;
+    font-size: 18px;
+}
+
+.bookDetailWrap > .bookDetailBox > .bookDetailInfoBox > ul >li > span {
+    font-weight: bold;
+}
+/* bookDetailIntroBox */
+.bookDetailWrap > .bookDetailIntro > .bookDetailIntroTitle {
+    width : 1050px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    font-size: 25px;
+} 
+.bookDetailWrap > .bookDetailIntro > p {
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+/* bookDetailReview */
+.bookDetailWrap > .bookDetailReview > .bookDetailReviewTitle {
+    width : 1050px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    font-size: 25px;
+}
+.bookDetailWrap > .bookDetailReview > h3 {
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.bookDetailWrap > .bookDetailReview > p {
+    padding : 20px 0 50px 0px;
+}
+/* bookDetailBtnBox */
+.bookDetailWrap > .bookDetailBtnBox {
+    padding-bottom: 50px;
+    margin-left: 350px;
+}
+
+.bookDetailWrap > .bookDetailBtnBox > input {
+    width : 100px; 
+    height: 40px;
+}
+
+.bookTitle{
+	
+	margin-top:30px;
+	margin-right:110px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+}

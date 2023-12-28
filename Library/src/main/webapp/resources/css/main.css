@@ -1,0 +1,164 @@
+#container {
+	width: 100%;
+	height: auto;
+}
+
+/* section1 */
+#section1 {
+	width: 1200px;
+	height: 500px;
+	margin: 0 auto;
+	display: flex;
+	position: relative;
+}
+
+.mainSlideWrap {
+	width: 1200px;
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+	padding-top: 50px;
+
+}
+
+.mainSlide {
+	width: 4800px;
+
+}
+
+.mainSlide li {
+	width: 1200px;
+	height: 400px;
+	float: left;
+}
+
+.mainSlide li img {
+	width: 100%;
+	height: 100%;
+}
+
+.mainSlideWrap > span {
+	position: absolute;
+	top: 55%;
+	display: block;
+	font-size: 38px;
+	color: #000;
+	line-height: 40px;
+	background: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+	height: 50px;
+	transform: translateY(-50%);
+}
+
+.mainSlideWrap > span:hover {
+	background: rgba(0, 0, 0, 0.6);
+	color: #fff;
+}
+
+.prev {
+	left: 0px;
+	border-radius: 0px 10px 10px 0px;
+	padding: 10px;
+}
+
+.next {
+	right: 0px;
+	border-radius: 10px 0px 0px 10px;
+	padding: 10px;
+}
+
+/* section2 */
+#section2 {
+	width: 100%;
+	height: 500px;
+	background-color: #eee;
+}
+
+.recommendTitle {
+	font-size: 25px;
+	font-weight: bold;
+	width: 300px;
+	height: 50px;
+	padding-bottom: 20px;
+	
+}
+
+.recommendTitle > ul {
+	display: flex;
+	justify-content: space-between;
+}
+
+.recommendTitle > ul > li {
+	padding-bottom: 5px;
+}
+
+
+.underline {
+	border-bottom: 2px solid #000;
+}
+
+.recommendWrap {
+	width: 1200px;
+	height: 400px;
+	padding-top: 50px;
+	margin: 0 auto;
+}
+
+.recommend {
+	width: 1200px;
+	position: relative;
+}
+
+.recommendWrap>ul>.bestWrap {
+	width: 1200px;
+	height: 400px;
+}
+
+.recommendWrap>ul>.newWrap {
+	width: 1200px;
+	height: 400px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+/* bestWrap */
+.bestWrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.bestWrap > div {
+	width : 200px;
+	height : 320px;
+}
+
+.bestWrap > div > a > img {
+	width : 100%;
+	height : 280px;
+	padding-bottom: 10px;
+}
+
+.bestWrap > div > p {
+	text-align: center;
+}
+/* newWrap */
+.newWrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.newWrap > div {
+	width : 200px;
+	height : 320px;
+}
+
+.newWrap > div > a > img {
+	width : 100%;
+	height : 280px;
+	padding-bottom: 10px;
+}
+
+.newWrap > div > p {
+	text-align: center;
+}

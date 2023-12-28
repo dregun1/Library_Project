@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.ManagerMapper">
+
+<sql id="criteria">
+    <trim prefix="(" suffix=") AND" >
+        <foreach collection="typeArr" item="type" separator=" OR ">
+            <if test="type=='I'.toString()">
+                isbn LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type=='M'.toString()">
+                memberid LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </foreach>
+    </trim>
+</sql>
+
+
+<sql id="criteriaMember">
+    <trim prefix="(" suffix=") AND" >
+        <foreach collection="typeArr" item="type" separator=" OR ">
+            <if test="type=='N'.toString()">
+                membername LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type=='M'.toString()">
+                memberid LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type=='P'.toString()">
+                postalcode LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="type=='E'.toString()">
+                email LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </foreach>
+    </trim>
+</sql>
+	
+	<!--  관리자 페이지 예약조회 -->
+	<select id="getManagerReservation" resultType="com.ezen.domain.ReservationVO">
+	   
+	        SELECT id, memberid, isbn, rental_status, DATE_FORMAT(expiration_date, '%Y년 %m월 %d일 %H:%i') AS expiration_date
+	        FROM reservation
+	    	where
+	    <include refid="criteria"></include>
+	   
+	       	rental_status = 0
+	        ORDER BY id ASC
+	        LIMIT #{skip}, #{amount} 	
+	    
+	</select>
+	
+		
+	
+	<!-- 예약리스트 총갯수 -->
+	<select id="getReservationTotal" resultType="int">
+		 SELECT COUNT(*)
+			FROM reservation
+			where
+			<include refid="criteria"></include> 			
+			 rental_status = 0
+	</select>
+
+	<update id="updateCancelReservation">
+		UPDATE reservation
+		SET rental_status = 2
+		WHERE id=#{id}			
+	</update>
+	
+	
+	<!-- 대여 추가 -->
+	<insert id="addrental">
+		INSERT INTO rentallist ( rentdate, plannedreturndate, isbn, memberid )
+		VALUES ( CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY), #{isbn}, #{memberid})
+	</insert>
+	
+	<!-- reservation테이블 rental_status 1로 바꾸기 -->
+	<update id="updateRentalStatus">
+		UPDATE reservation
+		SET rental_status = 1
+		WHERE memberid = #{memberid} AND isbn = #{isbn}
+	</update>
+	
+	<!-- book테이블 예약수량과 대여수량업데이트 -->
+	<update id="updateBooktable">
+		UPDATE book
+		SET reservation_quantity = reservation_quantity - 1,
+		    rentedbookcnt = rentedbookcnt + 1,
+		    cumrentalcnt = cumrentalcnt + 1
+		WHERE isbn = #{isbn}
+	</update>
+	
+	<!--  관리자 페이지 대여 중인 리스트 -->
+	<select id="getManagerRentallists" resultType="com.ezen.domain.RentalListVO">
+	   
+	        SELECT *
+	        FROM rentallist
+	    	where
+	   	 <include refid="criteria"></include>
+	   	  <![CDATA[	   
+	        actualreturndate IS NULL and plannedreturndate >= CURDATE()
+	        LIMIT #{skip}, #{amount} 	
+	        ]]>
+	</select>
+		
+	<!--대여 중인 리스트 총갯수 -->
+	<select id="getCurRentalTotal" resultType="int">
+		 SELECT COUNT(*)
+			FROM rentallist
+			where
+			<include refid="criteria"></include>
+			<![CDATA[	 			
+			actualreturndate IS NULL and plannedreturndate >= CURDATE()
+			]]>
+	</select>
+	
+	<!-- 책 반납하고 나서 대여리스트 수정 -->
+	<update id="returnBook">
+		update rentallist
+		set actualreturndate =  CURDATE()
+		where isbn = #{isbn} and memberid = #{memberid}
+	</update>
+	
+	<!-- 책 반납하고 나서 북테이블 수정 -->
+	<update id="returnAfterBook">
+		update book
+		set rentedbookcnt = rentedbookcnt -1, curbookcnt = curbookcnt +1
+		where isbn = #{isbn}
+	</update>
+	
+	<update id="extensionReturnDate">
+		UPDATE rentallist
+		SET plannedreturndate = DATE_ADD(plannedreturndate, INTERVAL 7 DAY)
+		where isbn = #{isbn} and memberid = #{memberid}
+	</update>	
+	
+	
+	<!--  관리자 페이지 지난 대여 리스트 -->
+	<select id="getPastRentallists" resultType="com.ezen.domain.RentalListVO">	   
+	        SELECT *
+	        FROM rentallist
+	    	where
+	   	 <include refid="criteria"></include>	   
+	        actualreturndate IS NOT NULL
+	        LIMIT #{skip}, #{amount} 	
+	</select>
+		
+	<!--지난 대여 리스트 총갯수 -->
+	<select id="getPastRentalTotal" resultType="int">
+		 SELECT COUNT(*)
+			FROM rentallist
+			where
+			<include refid="criteria"></include> 			
+			actualreturndate IS NOT NULL
+	</select>
+	
+	<!--  연체 중인 리스트 -->
+	<select id="getOverdueList" resultType="com.ezen.domain.RentalListVO">	   
+	        SELECT *
+	        FROM rentallist
+	    	where
+	   	 <include refid="criteria"></include>	
+	   	  <![CDATA[    
+	       	plannedreturndate < CURDATE()
+	        LIMIT #{skip}, #{amount} 	
+	         ]]>
+	</select>
+	
+	<!--  연체 총 갯수 -->
+	<select id="getOverdueTotal" resultType="int">	   
+	        SELECT count(*)
+	        FROM rentallist
+	    	where
+	   	 <include refid="criteria"></include>	
+	   	 <![CDATA[  
+	        plannedreturndate < CURDATE() ]]> 		      
+	</select>
+	
+	<!-- 책 폐기처리할 떄 수량 조절 -->
+	<update id="discardBook">
+		update book
+		set rentedbookcnt = rentedbookcnt -1, totbookcnt = totbookcnt -1
+		where isbn = #{isbn}
+	</update>
+	
+	<!-- 책 폐기처리하고 대여목록 삭제 -->
+	<delete id="deleteDiscard">
+		DELETE FROM rentallist
+		WHERE rentallistid = #{rentallistid}
+	</delete>
+	
+	<!-- 책 수정 -->
+	<update id="updateBook">
+		update book set
+		title=#{title}, genrecode=#{genrecode}, genrecrawled=#{genrecrawled},
+		author=#{author}, publisher=#{publisher},publisheddate=#{publisheddate},price=#{price},
+		modifier=#{modifier}, bookimgurl = #{bookimgurl}, bookcontent=#{bookcontent}
+		where isbn=#{isbn}
+	</update>
+		
+	
+	<!-- 일반회원 리스트-->
+	<select id="getGeneralMember"  resultType="com.ezen.domain.MemberVO">	   
+	        SELECT *
+	        FROM member
+	    	where
+	   	 <include refid="criteriaMember"></include>	
+	   		memberflag = 0 	
+	   		LIMIT #{skip}, #{amount}	      
+	</select>
+	
+	<!-- 일반회원 수-->
+	<select id="GeneralMemberTotal" resultType="int">	   
+	        SELECT count(*)
+	        FROM member
+	    	where memberflag = 0 		      
+	</select>
+	
+	<!--관리자회원 리스트-->
+	<select id="getManagementMember"  resultType="com.ezen.domain.MemberVO">	   
+	        SELECT *
+	        FROM member
+	    	where
+	   	 <include refid="criteriaMember"></include>	
+	   		memberflag = 01
+	   		LIMIT #{skip}, #{amount}		      
+	</select>
+	
+	<!-- 관리자회원 수-->
+	<select id="ManagementMemberTotal" resultType="int">	   
+	        SELECT count(*)
+	        FROM member
+	    	where memberflag = 01 		      
+	</select>
+	
+	<!-- 관리자 권한 부여-->
+	<update id="changeMemberflag">
+		update member set 
+		 	memberflag = "01"
+		 	where memberid = #{memberid}
+	</update>
+	
+	<!-- 관리자 권한 부여-->
+	<update id="cancelMemberflag">
+		update member set 
+		 	memberflag = 0
+		 	where memberid = #{memberid}
+	</update>
+
+	
+</mapper>

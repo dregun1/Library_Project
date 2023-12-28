@@ -1,0 +1,227 @@
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 1500px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>i {
+    padding-left: 130px;
+}
+.shareContentWrap>.shareNav>ul>.bookNav{
+    display: none;
+    line-height: 60px;
+}
+.shareContentWrap>.shareNav>ul>.subscriptionNav {
+    display: none;
+    line-height: 60px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 11px;
+}
+
+.keyword {
+    color: #f36207;
+}
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+}
+
+.bookInsertWrap {
+    padding-top: 0px;
+}
+
+.bookInsertWrap table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; /* 위에 테이블과의 간격 조정 */
+}
+
+.bookInsertWrap table tr,
+.bookInsertWrap table th,
+.bookInsertWrap table td {
+    border: 1px solid #e3e3e3;
+    height: 30px;
+}
+
+.bookInsertWrap table th,
+.bookInsertWrap table td {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    vertical-align: middle;
+    padding: 10px; /* 상하좌우 여백 조정 */
+}
+
+.bookInsertWrap table th {
+    width: 20%; /* th 요소의 너비를 조정합니다. */
+}
+
+.bookInsertWrap table td {
+    width: 20%; /* th 요소의 너비를 조정합니다. */
+}
+
+.bookInsertWrap table th:nth-child(5),
+.bookInsertWrap table th:nth-child(6) {
+    width: 10%; /* 다섯 번째와 여섯 번째 th 요소의 너비를 조정합니다. */
+}
+
+.bookInsertWrap table td:nth-child(5),
+.bookInsertWrap table td:nth-child(6) {
+    width: 10%; /* 다섯 번째와 여섯 번째 th 요소의 너비를 조정합니다. */
+}
+
+.bookInsertBtnBox {
+    padding: 20px 0px;
+}
+
+
+
+.paging ul li{
+	 list-style: none;
+        padding: 10px;
+        margin: 0;
+        float : left;
+        margin-left : 20px;
+ 
+	
+}
+
+.paging ul li a {
+    color: black;
+    text-decoration: none; 
+}
+	
+.paginate_button.active a {
+	    font-weight: bold;
+	    text-decoration:none;
+}
+
+.searchform{
+	padding: 20px 0px;
+}
+
+.submenu {
+	margin-top : 20px;
+	margin-bottom : 0px;
+	f
+}
+
+.submenu th{	
+	border: 1px solid #e3e3e3;
+    height: 20px;
+	font-size :15px;
+	padding: 5px;	
+}
+
+.submenu a {
+	text-decoration:none;
+	color:black;
+    font-family:   font-family: 'Comic Sans MS', cursive;
+  
+}
+		
+.selectmenu {
+    background-color: #f36207;
+}
+
+.selectmenu a{
+    background-color: #f36207;
+    color:white;
+}
+
+<style>
+  .overdue {
+    color: red;
+  }
+</style>

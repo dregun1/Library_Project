@@ -1,0 +1,240 @@
+.shareContainer {
+    margin: 0 auto;
+    width: 1800px;
+    height: 900px;
+    position: relative;
+    padding-top: 12px;
+}
+
+.shareImg {
+    margin: 0 auto;
+    width: 1800px;
+    height: 200px;
+    background: url(img/svisual_img.png);
+}
+
+.shareContentWrap {
+    width: 1400px;
+    height: auto;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 네비 */
+.shareContentWrap>.shareNav {
+    width: 300px;
+    height: auto;
+}
+
+.shareContentWrap>.shareNav>ul>li {
+    width: 298px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    border-top: none;
+}
+
+.shareContentWrap>.shareNav>ul>li>span {
+    padding-left: 20px;
+}
+
+.shareContentWrap>.shareNav>ul>li>span > a {
+	text-decoration: none;
+	color: #000;
+}
+
+.shareContentWrap>.shareNav>ul>li>.keyword > a {
+	text-decoration: none;
+	color: #f36207;
+}
+
+.shareContentWrap>.shareNav>ul>.navTitle {
+    width: 300px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f36207;
+    color: #fff;
+    font-size: 30px;
+    padding-top: 11px;
+    border-left: none;
+    border-right: none;
+}
+
+
+.shareContentWrap>.shareContentBox {
+    width: 1050px;
+    height: auto;
+}
+
+/* contentTitle */
+.shareContentWrap>.shareContentBox>.shareContentTitle {
+    width: 1050px;
+    height: 120px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentTitle {
+    font-size: 36px;
+    color: #fff;
+    height: 60px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav {
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.shareContentWrap>.shareContentBox>.shareContentTitle>.contentNav>.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    margin: 0 10px;
+    background: url(img/ico_naviArrow.png)0 50% no-repeat;
+    vertical-align: top;
+}
+
+.shareContentWrap>.shareContentBox>.shareContent {
+    width: 1050px;
+    height: auto;
+    /* background-color: pink; */
+}
+
+/* join */
+.joinTitle {
+    padding-top: 50px;
+    width: 900px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+}
+
+.joinTitle>h5 {
+    font-size: 30px;
+    padding-top: 10px;
+}
+
+.joinTitle>p {
+    padding-top: 30px;
+}
+
+.joinForm {
+    width: 1050px;
+    height: 500px;
+    position: relative;
+}
+
+.joinForm>table {
+    width: 900px;
+    height: 500px;
+}
+
+.joinForm>table>tr,
+th,
+td {
+    vertical-align: middle;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.joinForm>table>tr,
+th {
+    background-color: #eee;
+    text-align: left;
+    font-size: 20px;
+    padding-left: 30px;
+    width: 150px;
+}
+
+.joinForm>table>tr,
+td {
+    padding-left: 40px;
+}
+
+.joinForm>table>tr,
+td>input {
+    padding: 12px 100px 8px 0px;
+}
+
+.joinForm>table>tr,
+td>.joinBtn {
+    padding: 10px 0px;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.joinCheck {
+     margin-top: 50px; /* 일정한 상단 여백 추가 */
+    margin-left: 0;
+    width: 200px;
+    height: 50px;
+    background-color: rgba(243, 98, 7, 0.8);
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 720px;
+    left: 500px;
+}
+
+.joinCancel {
+    margin-top: 50px; /* 일정한 상단 여백 추가 */
+    margin-left: 10px; /* 버튼 사이의 간격을 위한 왼쪽 여백 추가 */
+    width: 200px;
+    height: 50px;
+    background-color: rgba(255, 50, 50, 0.8);
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 720px;
+    left: 750px;
+}
+
+/* joinNav */
+.joinNav > ul {
+    display: flex;
+    padding-top: 50px;
+}
+
+.joinNav > ul > li {
+    width : 200px;
+    height : 50px;
+    color: #000;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    position: relative;
+}
+
+.joinNav > ul > li:first-child {
+    border-left: 1px solid #e3e3e3;
+}
+
+.joinNav > ul > .keyNav {
+    background-color: #f36207;
+    color: #fff;
+}
+
+.joinNav > ul > li > img {
+    width: 19px;
+    height: 50px;
+    position: absolute;
+    top : 0;
+    left : 220px;
+    z-index: 3;
+}

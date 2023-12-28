@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.mapper.BookMapper">
+
+	<sql id="criteria">
+		<trim prefix="where (" suffix=")">
+			<foreach collection="typeArr" item="type" separator="or">
+				<if test="type=='T'.toString()">
+					title like concat('%', #{keyword}, '%')
+				</if>
+				<if test="type=='P'.toString()">
+					publisher like concat('%', #{keyword}, '%')
+				</if>
+				<if test="type=='A'.toString()">
+					author like concat('%', #{keyword}, '%')
+				</if>
+				<if test="type=='G'.toString()">
+					genrecrawled like concat('%', #{keyword}, '%')
+				</if>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging" resultType="com.ezen.domain.BookVO">
+		<![CDATA[
+			select *,(select round(avg(score),1) from ratings r 
+				  	where b.isbn = r.isbn group by b.isbn) score 
+			from book b
+		]]>
+			<include refid="criteria"></include>
+		<![CDATA[
+			limit #{skip}, #{amount} 	
+		]]>
+	</select>
+	
+<!-- 이건 신규리스트인데, -->
+	<select id="getListWithPagingByPdate" resultType="com.ezen.domain.BookVO">
+			select *, (select round(avg(score),1) from ratings r 
+				  	where b.isbn = r.isbn group by b.isbn) score  	 
+			from book b
+			
+			order by publisheddate desc
+			limit #{skip}, #{amount} 	
+	</select>
+
+<!-- 인기리스트인데 cumrentalcnt라는 누적대여 순으로 정렬.     -->
+	<select id="getListWithPagingByRentalCnt" resultType="com.ezen.domain.BookVO">
+			select *, (select round(avg(score),1) from ratings r 
+				  	where b.isbn = r.isbn group by b.isbn) score 
+			from book b	
+			order by cumrentalcnt desc
+			limit #{skip}, #{amount} 	
+	</select>
+	
+	<select id="getTotalBookCount" resultType="int">
+		select count(*) from book
+		<include refid="criteria"></include>
+	</select>
+	
+	<select id="getList" resultType="com.ezen.domain.BookVO">
+		select * from book
+	</select>
+	
+	<insert id="insertBook">
+		insert into book(isbn, title, genrecode, genrecrawled, author, publisher, publisheddate,
+						totbookcnt, rentedbookcnt, curbookcnt, price, cumrentalcnt, registereddate,
+						memberid, bookimgurl, bookcontent )
+		values(#{isbn}, #{title}, #{genrecode}, #{genrecrawled}, #{author}, #{publisher}, #{publisheddate},
+				#{totbookcnt}, #{rentedbookcnt}, #{totbookcnt}, #{price}, #{cumrentalcnt}, CURDATE(),
+				#{memberid}, #{bookimgurl}, #{bookcontent} )
+			
+	</insert>
+	
+	<select id="read" resultType="com.ezen.domain.BookVO">
+		select *
+		 from book where isbn = #{isbn}
+	</select>
+	
+	<delete id="deleteBook">
+		delete from book where isbn = #{isbn}
+	</delete>
+	
+	<update id="updateBook">
+		update book set
+		title = #{title}, genrecode = #{genrecode}, genrecrawled = #{genrecrawled}, author = #{author}, 
+		publisher = #{publisher}, publisheddate = #{publisheddate}, totbookcnt = #{totbookcnt}, 
+		rentedbookcnt = #{rentedbookcnt}, curbookcnt = #{curbookcnt}, price = #{price}, cumrentalcnt = #{cumrentalcnt}, 
+		registereddate = #{registereddate},	
+		memberid = #{memberid},
+		bookimgurl = #{bookimgurl}, bookcontent = #{bookcontent}
+		where isbn = #{isbn}
+	</update>
+	
+	<select id="selectReservation" resultType="String">
+		select * from reservation where memberid = #{memberid} and isbn=#{isbn} and rental_status = 0
+	</select>
+	
+	<!-- 예약리스트 추가 -->
+	<insert id="insertReservation">
+		insert into reservation(memberid, isbn)
+		values(#{memberid}, #{isbn})
+	</insert>
+	
+	<!-- 예약했을 때 추가로 book테이블 업데이트  -->
+	<update id="BookReservationUpdate">
+		UPDATE book
+			SET reservation_quantity = reservation_quantity + 1, curbookcnt = curbookcnt - 1
+			WHERE isbn = #{isbn}
+	</update>
+	
+	
+	<!-- 예약취소 했을 떄 때 추가로 book테이블 업데이트  -->
+	<update id="BookReservationCancelUpdate">
+		UPDATE book
+			SET reservation_quantity = reservation_quantity - 1, curbookcnt = curbookcnt + 1
+			WHERE isbn = #{isbn}
+	</update>
+	
+	
+	
+	<select id="selectCurbookcnt" resultType="int">
+		select curbookcnt from book where isbn = #{isbn}
+	</select>
+	
+	
+	
+	<!-- 예약리스트 -->
+	<select id="getBooksByReservations" resultType="com.ezen.domain.BookVO">
+	    SELECT b.*, DATE_FORMAT(r.expiration_date, '%Y년 %m월 %d일 %H:%i') AS expiration_date, r.id
+	    FROM reservation r
+	    JOIN book b ON r.isbn = b.isbn
+	    WHERE r.memberid = #{memberid} AND r.rental_status = 0
+	    ORDER BY r.id DESC
+	    LIMIT #{cri.skip}, #{cri.amount}	
+	</select>
+
+	<!--지난 예약리스트 -->
+	<select id="getPastReservations" resultType="com.ezen.domain.BookVO">
+	    SELECT b.*, r.expiration_date, r.id
+	    FROM reservation r
+	    JOIN book b ON r.isbn = b.isbn
+	    WHERE r.memberid = #{memberid} AND r.rental_status != 0
+	    ORDER BY r.id DESC
+	    LIMIT #{cri.skip}, #{cri.amount}	
+	</select>
+	
+	
+	
+	<!-- 예약리스트 총갯수 -->
+	<select id="getTotalReservation" resultType="int">
+		 SELECT COUNT(*)
+			FROM reservation r
+			JOIN book b ON r.isbn = b.isbn
+			WHERE r.memberid = #{memberid} AND r.rental_status = 0
+	</select>
+	
+	<!-- 지난예약리스트 총갯수 -->
+	<select id="getTotalPastReservation" resultType="int">
+		 SELECT COUNT(*)
+			FROM reservation r
+			JOIN book b ON r.isbn = b.isbn
+			WHERE r.memberid = #{memberid} AND r.rental_status != 0
+	</select>
+	
+	<!-- 예약된 도서 중 rental-status가 0인 도서의 개수 조회 -->
+	<select id="CurReservatinCount" resultType="int">
+	    SELECT COUNT(*)
+	    FROM reservation
+	    WHERE memberid = #{memberid} AND rental_status = 0
+	</select>
+	
+	<!-- 예약리스트 삭제 누르면 지난 예약리스트로 넘기기 -->
+	<update id="updateReservation">
+		UPDATE reservation
+		SET rental_status = 2
+		WHERE memberid = #{memberid} AND isbn = #{isbn};			
+	</update>
+	
+	<!-- 지난 예약리스트 완전 삭제 -->
+	<delete id="deleteReservation">
+		DELETE FROM reservation WHERE id = #{id};
+	</delete>
+	
+	<!-- 관심도서 추가 -->
+	<insert id="insertInterested">
+		insert into wishlist(memberid, isbn)
+		values(#{memberid}, #{isbn})
+	</insert>
+	
+	<!--관심도서 조회 -->
+	<select id="getInterested" resultType="com.ezen.domain.BookVO">
+	    SELECT b.*, w.wishlistid
+	    FROM wishlist w
+	    JOIN book b ON w.isbn = b.isbn
+	    WHERE w.memberid = #{memberid}
+	    ORDER BY w.wishlistid DESC
+	    LIMIT #{cri.skip}, #{cri.amount}	
+	</select>
+	
+	
+	<!-- 관심도서 총갯수 -->
+	<select id="getTotalInterested" resultType="int">
+		 SELECT COUNT(*)
+			FROM wishlist w
+			JOIN book b ON W.isbn = b.isbn
+			WHERE W.memberid = #{memberid};
+	</select>
+	
+	<!-- 관심도서 이미추가했는지 확인 -->
+	<select id="selectInterested" resultType="String">
+		select * from wishlist where memberid = #{memberid} and isbn=#{isbn}
+	</select>
+	
+	<!-- 관심도서 삭제 -->
+	<delete id="deleteInterested">
+		DELETE FROM wishlist WHERE wishlistid = #{wishlistid};
+	</delete>
+	
+	<!--대여리스트 -->
+	<select id="getRentalList" resultType="com.ezen.domain.BookVO">
+	    SELECT b.*, r.plannedreturndate, r.rentallistid
+	    FROM rentallist r
+	    JOIN book b ON r.isbn = b.isbn
+	    WHERE r.memberid = #{memberid} and r.actualreturndate is null
+	    ORDER BY  r.plannedreturndate DESC
+	    LIMIT #{cri.skip}, #{cri.amount}	
+	</select>
+
+	
+	<!-- 대여리스트 총갯수 -->
+	<select id="getTotalRental" resultType="int">
+		 SELECT COUNT(*)
+			FROM rentallist r
+			JOIN book b ON r.isbn = b.isbn
+			WHERE r.memberid = #{memberid} and r.actualreturndate is null
+	</select>
+	
+	<select id="selectExtensionCount" resultType="int">
+		select extensioncount 
+		from rentallist
+		where rentallistid = #{rentallistid}
+	</select>
+	
+	<update id="Extension">
+	UPDATE rentallist
+		SET plannedreturndate = DATE_ADD(plannedreturndate, INTERVAL 7 DAY),
+		    extensioncount = extensioncount + 1
+		WHERE rentallistid = #{rentallistid}	
+	</update>
+	
+	<!--반납리스트 -->
+	<select id="getReturnList" resultType="com.ezen.domain.BookVO">
+	    SELECT b.*, r.plannedreturndate, r.rentallistid, r.actualreturndate
+	    FROM rentallist r
+	    JOIN book b ON r.isbn = b.isbn
+	    WHERE r.memberid = #{memberid} and r.actualreturndate is not null
+	    ORDER BY  r.plannedreturndate DESC
+	    LIMIT #{cri.skip}, #{cri.amount}	
+	</select>
+
+	
+	<!-- 반납리스트 총갯수 -->
+	<select id="getTotalReturn" resultType="int">
+		 SELECT COUNT(*)
+			FROM rentallist r
+			JOIN book b ON r.isbn = b.isbn
+			WHERE r.memberid = #{memberid} and r.actualreturndate is not null
+	</select>
+	
+	<!-- 반납된 행 삭제 -->
+	<delete id="deleteReturn">
+		delete from rentallist
+		where rentallistid = #{rentallistid}	
+	</delete>
+	
+</mapper>

@@ -1,0 +1,22 @@
+footer {
+	width : 100%;
+	border-top: 1px solid #000;
+}
+
+.footerWrap {
+	width : 1200px;
+	height : 100px;
+	margin : 0 auto;
+}
+
+.footerWrap > p {
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 20px;
+	line-height: 30px;
+	word-spacing: 5px;
+}
+
+.footerWrap > p > span {
+	font-weight: bold;
+}
